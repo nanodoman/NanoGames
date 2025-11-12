@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wunsz</title>
+</head>
+<style>
+html {
+	background: #333;
+	zoom: 200%;
+}
+body > div {
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+    margin-top: 2em;
+}
+#area {
+	border: 2px inset #aaccff;
+	background: white;
+	border-radius: 5px;
+}
+.cell {
+	box-sizing: border-box;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+}
+#menu {
+	margin-top: 1em;
+	height: auto;
+	justify-content: center;
+	color: white;
+}
+p {
+	margin: 0;
+}
+.myPos {
+	background: #00ff00;
+}
+.tail {
+	background: #00ff00;
+	filter: opacity(0.4);
+}
+.point {
+	background: #00ffff;
+}
+</style>
+<script>
+	var x = 3;
+	var y = 0;
+	var pos = 'pos' + x + y;
+	var dir = 'right';
+	var divs = '';
+	var tail = '';
+	var tails = [];
+	var sLen = 1;
+	var tic = 1;
+	var scoreVal = 0;
+	var speed = 200;
+	var point = '';
+	var size = 100;
+
+	function buildArea() {
+		for (i = 1; i <= size; i++) {
+			area.innerHTML+= '<div id=\'pos' + Math.floor((i-1)/Math.sqrt(size)) + ((i-1)%Math.sqrt(size)) + '\' class=\'cell\'></div>';
+		}
+		area.style.width = Math.sqrt(size)*10 + 'px';
+		area.style.height = Math.sqrt(size)*10 + 'px';
+	}
+	
+	start = setInterval(game,speed);
+	
+	function move(event) {
+//		console.log(event.keyCode)
+		switch (event.keyCode) {
+			case 37:	//--left--
+				if (gameDir != 'right') {
+					dir = 'left'
+				}
+				break;
+			case 38:	//--up--
+				if (gameDir != 'down') {
+					dir = 'up'
+				}
+				break;
+			case 39:	//--right--
+				if (gameDir != 'left') {
+					dir = 'right'
+				}
+				break;
+			case 40:	//--down--
+				if (gameDir != 'up') {
+					dir = 'down'
+				}
+		}
+	}
+	
+	function spawnPoint() {
+		let x = Math.floor(Math.random()*Math.sqrt(size));
+		let y = Math.floor(Math.random()*Math.sqrt(size));
+		return ('pos' + x + y);
+	}
+	function speedUp() {
+		clearInterval(start);
+		speed -= 25;
+		start = setInterval(game, speed);
+	}
+	function game() {
+		tic++;
+		score.innerText = scoreVal;
+		gameDir = dir;
+		if (tic%15 == 0) {
+			point = spawnPoint();
+		}
+		switch (dir) {
+			case 'left':
+				if (y > 0) {
+					y -= 1;
+					tail = 'pos' + x + (y+1);
+				} else {
+					gameOver();
+				}
+				break;
+			case 'up':
+				if (x > 0) {
+					x -= 1;
+					tail = 'pos' + (x+1) + y;
+				} else {
+					gameOver();
+				}
+				break;
+			case 'right':
+				if (y < Math.sqrt(size)-1) {
+					y += 1;
+					tail = 'pos' + x + (y-1);
+				} else {
+					gameOver();
+				}
+				break;
+			case 'down':
+				if (x < Math.sqrt(size)-1) {
+					x += 1;
+					tail = 'pos' + (x-1) + y;
+				} else {
+					gameOver();
+				}
+		}
+		pos = 'pos' + x + y;
+		divs = document.getElementsByTagName('div');
+		for (i = 1; i < divs.length; i++) {
+			divs[i].classList.remove('myPos', 'tail', 'point')
+		}
+		for (i = 0; i < tails.length; i++) {
+			document.getElementById(tails[i]).classList.add('tail');
+		}
+		if (tails.length <= sLen) {
+			
+		} else {
+			tails.pop();
+		}
+		tails.unshift(pos);
+		document.getElementById(pos).classList.add('myPos');
+		for (i = 1; i < tails.length; i++) {
+			if (pos === tails[i]) {
+				gameOver();
+			}
+		}
+		if (pos == point) {
+			point = '';
+			sLen++;
+			scoreVal++;
+			if (scoreVal%5 == 0) {
+				speedUp();
+			}
+		}
+		if (point != '') {
+			document.getElementById(point).classList.add('point');
+		}
+	}
+	function gameOver() {
+		clearInterval(start);
+		document.getElementsByClassName('myPos')[0].style.background = '#ff0000';
+		let x = document.getElementsByClassName('tail')
+		for (i = 0; i < x.length; i++) {
+			x[i].style.background = '#ff0000';
+			x[i].style.filter = 'opacity(0.4)';
+		}
+		clearInterval(start);
+		console.log('Game Over')
+	}
+</script>
+<body onload='buildArea()' onkeydown='move(event)'>
+	<div id='area'></div>
+	<div id='menu'>Score:<p id='score'/></div>
+</body>
+</html>
