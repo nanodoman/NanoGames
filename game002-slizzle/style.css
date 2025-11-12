@@ -1,0 +1,137 @@
+:root {
+  --size: 3;
+
+  /* melon skin*/
+  --melon-1: #6a994e;
+  --melon-2: #a7c957;
+  --melon-3: #b5e48c;
+  --melon-4: #d9f99d;
+  --melon-5: #f28c28;
+  --melon-6: #fdf7e3;
+  --melon-7: #2b2b2b;
+}
+
+body {
+  font: 600 16px/1 'Trebuchet MS', Verdana, sans-serif;
+  background-color: var(--melon-6);
+  -webkit-user-select: none;
+  user-select: none;
+  color: var(--melon-7);
+}
+
+#frame {
+  margin-inline: auto;
+  width: min-content;
+  border-radius: 1em;
+  border-width: 1em;
+  border-style: solid;
+  border-color: var(--melon-2) var(--melon-1) var(--melon-1) var(--melon-2);
+  outline: 2px outset var(--melon-1);
+  background-color: var(--melon-5);
+}
+
+#game {
+  display: grid;
+  aspect-ratio: 1;
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-template-rows: repeat(var(--size), 1fr);
+  gap: 1px;
+  padding: 2px;
+}
+
+.tile {
+  aspect-ratio: 1;
+  width: clamp(32px, 50vw, calc(512px / var(--size)));
+  color: var(--melon-6);
+  text-shadow: 2px 2px 1px var(--melon-7);
+  background-image: url(./Copilot_20251111_213521.png);
+  background-size: calc(var(--size) * 100%) calc(var(--size) * 100%);
+
+  /* row 2 */
+  /* ((row - 1) * tiles + 1) (row * tiles) */
+  &:nth-child(n + 4):nth-child(-n + 6) {
+    /* 100% / (tiles - 1) ...? */
+    background-position-y: 50%;
+  }
+
+  /* row 3 */
+  &:nth-child(n + 7):nth-child(-n + 9) {
+    background-position-y: 100%;
+  }
+
+  /* col 2 */
+  &:nth-child(3n-1) {
+    background-position-x: 50%;
+  }
+
+  /* col 3 */
+  &:nth-child(3n-0) {
+    background-position-x: 100%;
+  }
+
+  &.row-1 {
+    grid-row: 1;
+  }
+
+  &.row-2 {
+    grid-row: 2;
+  }
+
+  &.row-3 {
+    grid-row: 3;
+  }
+
+  &.row-4 {
+    grid-row: 4;
+  }
+
+  &.row-5 {
+    grid-row: 5;
+  }
+
+  &.col-1 {
+    grid-column: 1;
+  }
+
+  &.col-2 {
+    grid-column: 2;
+  }
+
+  &.col-3 {
+    grid-column: 3;
+  }
+
+  &.col-4 {
+    grid-column: 4;
+  }
+
+  &.col-5 {
+    grid-column: 5;
+  }
+}
+
+#menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  background-color: var(--melon-4);
+}
+
+span {
+  border-radius: 1em;
+  background-color: var(--melon-6);
+  padding: 0.5em 1em;
+  border: 1px inset var(--melon-4);
+}
+
+button#start-button {
+  flex-basis: clamp(7ch, 100px, 25%);
+  border: none;
+  font: inherit;
+  font-size: inherit;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  color: inherit;
+  background-color: var(--melon-5);
+}
