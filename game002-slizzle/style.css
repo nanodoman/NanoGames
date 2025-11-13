@@ -20,6 +20,7 @@ body {
 }
 
 #frame {
+  position: relative;
   margin-inline: auto;
   width: min-content;
   border-radius: 1em;
@@ -28,6 +29,7 @@ body {
   border-color: var(--melon-2) var(--melon-1) var(--melon-1) var(--melon-2);
   outline: 2px outset var(--melon-1);
   background-color: var(--melon-5);
+  box-shadow: 1em 1em 2em var(--melon-7);
 }
 
 #game {
@@ -46,6 +48,7 @@ body {
   text-shadow: 2px 2px 1px var(--melon-7);
   background-image: url(./Copilot_20251111_213521.png);
   background-size: calc(var(--size) * 100%) calc(var(--size) * 100%);
+  vertical-align: bottom;
 
   /* row 2 */
   /* ((row - 1) * tiles + 1) (row * tiles) */
@@ -125,7 +128,7 @@ span {
   border: 1px inset var(--melon-4);
 }
 
-button#start-button {
+button {
   flex-basis: clamp(7ch, 100px, 25%);
   border: none;
   font: inherit;
@@ -134,4 +137,50 @@ button#start-button {
   padding: 0.5em 1em;
   color: inherit;
   background-color: var(--melon-5);
+}
+
+#options-button {
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  width: 120px;
+  background: var(--melon-2);
+  anchor-name: --settings;
+  z-index: 10;
+}
+
+#settings {
+  position: absolute;
+  inset: unset;
+  top: anchor(bottom);
+  right: anchor(right);
+  left: anchor(left);
+  background: var(--melon-2);
+  width: 120px;
+  position-anchor: --settings;
+  border: none;
+  border-radius: 1em;
+  padding: unset;
+
+  menu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: unset;
+  }
+
+  label {
+    display: block;
+    padding: 0.5em 0.5em;
+    color: var(--melon-7);
+  }
+}
+
+input:is([type='checkbox'], [type='radio']) {
+  accent-color: var(--melon-5);
+}
+
+#frame:has(#tile-nums:not(:checked)) .tile {
+  color: transparent;
+  text-shadow: none;
 }

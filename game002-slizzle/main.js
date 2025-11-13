@@ -1,5 +1,6 @@
 class Game {
-  #size;
+  #size = 3;
+  #sizeOptions = Object.freeze([3, 4, 5]);
   #playing = false;
   #moves = 0;
   #time = 0;
@@ -19,8 +20,8 @@ class Game {
     return false;
   }
 
-  constructor(size = 3) {
-    this.#size = size;
+  constructor() {
+    this.options = document.querySelector('#options');
     this.game = document.querySelector('#game');
     this.moveCount = document.querySelector('#move-count');
     this.startButton = document.querySelector('#start-button');
@@ -42,21 +43,29 @@ class Game {
     this.startButton.innerText = 'Restart';
   }
 
-  setupTiles() {
-    this.game.replaceChildren();
-    document.documentElement.style.setProperty('--size', this.#size);
+  changeGrid(size) {
+    this.resetGame();
+    this.setupTiles(size);
+  }
 
-    for (let index = 0; index < this.#size ** 2; index++) {
-      const tileNumber = index + 1;
-      const tile = document.createElement('div');
-      const row = Math.floor(index / this.#size) + 1;
-      const col = (index % this.#size) + 1;
-      const last = tileNumber === this.#size ** 2;
-      tile.id = `t${tileNumber}`;
-      tile.classList.value = `tile row-${row} col-${col} ${last ? 'static' : ''}`;
-      tile.innerText = tileNumber;
+  setupTiles(size = 3) {
+    if (this.#sizeOptions.includes(+size)) {
+      this.#size = +size;
+      this.game.replaceChildren();
+      document.documentElement.style.setProperty('--size', this.#size);
 
-      this.game.insertAdjacentElement('beforeEnd', tile);
+      for (let index = 0; index < this.#size ** 2; index++) {
+        const tileNumber = index + 1;
+        const tile = document.createElement('div');
+        const row = Math.floor(index / this.#size) + 1;
+        const col = (index % this.#size) + 1;
+        const last = tileNumber === this.#size ** 2;
+        tile.id = `t${tileNumber}`;
+        tile.classList.value = `tile row-${row} col-${col} ${last ? 'static' : ''}`;
+        tile.innerText = tileNumber;
+
+        this.game.insertAdjacentElement('beforeEnd', tile);
+      }
     }
   }
 
@@ -135,4 +144,4 @@ class Game {
   }
 }
 
-const GAME = new Game(3);
+const GAME = new Game();

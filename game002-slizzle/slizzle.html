@@ -25,6 +25,23 @@
         <span><output id="move-count">0</output> Moves</span>
         <span id="time-display">00:00</span>
         <button id="start-button" onclick="GAME?.initialize()">Start</button>
+        <button id="options-button" popovertarget="settings">Settings</button>
+        <div id="settings" popover>
+          <menu>
+            <li>
+              <label><input id="tile-nums" type="checkbox" />Tile nums</label>
+            </li>
+            <li>
+              <label><input type="radio" name="size" value="3" onchange="GAME?.changeGrid(value)" checked />3x3</label>
+            </li>
+            <li>
+              <label><input type="radio" name="size" value="4" onchange="GAME?.changeGrid(value)" />4x4</label>
+            </li>
+            <li>
+              <label><input type="radio" name="size" value="5" onchange="GAME?.changeGrid(value)" />5x5</label>
+            </li>
+          </menu>
+        </div>
       </div>
     </div>
   </body>
