@@ -61,7 +61,8 @@ class Game {
         const col = (index % this.#size) + 1;
         const last = tileNumber === this.#size ** 2;
         tile.id = `t${tileNumber}`;
-        tile.classList.value = `tile row-${row} col-${col} ${last ? 'static' : ''}`;
+        tile.classList.value = `tile row-${row} col-${col}`;
+        if (last) tile.classList.add('static');
         tile.innerText = tileNumber;
 
         this.game.insertAdjacentElement('beforeEnd', tile);
@@ -93,18 +94,18 @@ class Game {
   }
 
   check() {
-    const winConditions = [
-      document.querySelector('#t1').classList.value === 'tile row-1 col-1',
-      document.querySelector('#t2').classList.value === 'tile row-1 col-2',
-      document.querySelector('#t3').classList.value === 'tile row-1 col-3',
-      document.querySelector('#t4').classList.value === 'tile row-2 col-1',
-      document.querySelector('#t5').classList.value === 'tile row-2 col-2',
-      document.querySelector('#t6').classList.value === 'tile row-2 col-3',
-      document.querySelector('#t7').classList.value === 'tile row-3 col-1',
-      document.querySelector('#t8').classList.value === 'tile row-3 col-2',
-    ];
+    const tiles = document.querySelectorAll('.tile:not(.static)');
+    const allCorrect = Array.from(tiles).every((tile, index) => {
+      const [row, col] = index
+        .toString(this.#size)
+        .padStart(2, '0')
+        .split('')
+        .map((t) => ++t);
 
-    if (!winConditions.includes(false)) {
+      return tile.classList.value === `tile row-${row} col-${col}`;
+    });
+
+    if (allCorrect) {
       clearInterval(this.#timer);
       const staticTile = document.querySelector('.tile.static');
       staticTile.style.visibility = 'visible';
