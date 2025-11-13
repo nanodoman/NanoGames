@@ -4,42 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slizzle &mdash; slide puzzle</title>
-    <script defer src="main.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <script defer src="src/main.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
   </head>
 
   <body>
     <div id="frame">
-              <div id="settings" popover>
-          <menu>
-            <li>
-              <label><input id="tile-nums" type="checkbox" />Tile nums</label>
-            </li>
-            <li>
-              <label
-                ><input
-                  id="grid3"
-                  type="radio"
-                  name="size"
-                  value="3"
-                  onchange="GAME?.changeGrid(value)"
-                  checked
-                />3x3</label
-              >
-            </li>
-            <li>
-              <label
-                ><input id="grid4" type="radio" name="size" value="4" onchange="GAME?.changeGrid(value)" />4x4</label
-              >
-            </li>
-            <li>
-              <label
-                ><input id="grid5" type="radio" name="size" value="5" onchange="GAME?.changeGrid(value)" />5x5</label
-              >
-            </li>
-          </menu>
-        </div>
-<div id="game" onclick="GAME?.slide(event)">
+      <div id="settings" popover>
+        <menu>
+          <li>
+            <label><input id="tile-nums" type="checkbox" />Tile nums</label>
+          </li>
+          <li>
+            <label
+              ><input
+                id="grid3"
+                type="radio"
+                name="size"
+                value="3"
+                onchange="GAME?.changeGrid(value)"
+                checked
+              />3x3</label
+            >
+          </li>
+          <li>
+            <label><input id="grid4" type="radio" name="size" value="4" onchange="GAME?.changeGrid(value)" />4x4</label>
+          </li>
+          <li>
+            <label><input id="grid5" type="radio" name="size" value="5" onchange="GAME?.changeGrid(value)" />5x5</label>
+          </li>
+        </menu>
+      </div>
+      <div id="game" onclick="GAME?.slide(event)">
         <!-- <div id="t1" class="tile row-1 col-1"></div>
         <div id="t2" class="tile row-1 col-2"></div>
         <div id="t3" class="tile row-1 col-3"></div>

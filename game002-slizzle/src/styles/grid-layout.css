@@ -1,0 +1,39 @@
+.tile.row-1 {
+  grid-row: 1;
+}
+
+.tile.row-2 {
+  grid-row: 2;
+}
+
+.tile.row-3 {
+  grid-row: 3;
+}
+
+.tile.row-4 {
+  grid-row: 4;
+}
+
+.tile.row-5 {
+  grid-row: 5;
+}
+
+.tile.col-1 {
+  grid-column: 1;
+}
+
+.tile.col-2 {
+  grid-column: 2;
+}
+
+.tile.col-3 {
+  grid-column: 3;
+}
+
+.tile.col-4 {
+  grid-column: 4;
+}
+
+.tile.col-5 {
+  grid-column: 5;
+}
