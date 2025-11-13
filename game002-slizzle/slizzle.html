@@ -10,6 +10,8 @@
 
   <body>
     <div id="frame">
+      <button id="options-button" popovertarget="settings">&#9881;</button>
+
       <div id="settings" popover>
         <menu>
           <li>
@@ -47,10 +49,9 @@
         <div id="t9" class="tile row-3 col-3"></div> -->
       </div>
       <div id="menu">
-        <span><output id="move-count">0</output> Moves</span>
+        <span><output id="move-count">0</output></span>
         <span id="time-display">00:00</span>
         <button id="start-button" onclick="GAME?.initialize()">Start</button>
-        <button id="options-button" popovertarget="settings">Settings</button>
       </div>
     </div>
   </body>

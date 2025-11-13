@@ -83,10 +83,18 @@ button {
   position: absolute;
   top: -0.5em;
   right: -0.5em;
-  width: 120px;
   background: var(--melon-2);
   anchor-name: --settings;
   z-index: 10;
+
+  &:has(+ :popover-open) {
+    width: 120px;
+
+    &::after {
+      content: 'Settings';
+      margin-inline-start: 1ch;
+    }
+  }
 }
 
 #settings {
@@ -123,4 +131,19 @@ input:is([type='checkbox'], [type='radio']) {
 #frame:has(#tile-nums:not(:checked)) .tile {
   color: transparent;
   text-shadow: none;
+}
+
+span:has(#move-count)::before {
+  content: '\21C4';
+  margin-inline-end: 1ch;
+}
+
+#time-display::before {
+  content: '\23F1';
+  margin-inline-end: 1ch;
+}
+
+span:has(#move-count),
+#time-display {
+  text-wrap: nowrap;
 }
