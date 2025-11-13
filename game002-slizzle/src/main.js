@@ -82,19 +82,32 @@ class Game {
   randomize() {
     const tiles = [...document.querySelectorAll('.tile:not(.static)')];
     let iteration = 0;
+    const permutation = [];
 
     while (tiles.length) {
       const index = Math.round(Math.random() * 10) % tiles.length;
       const row = (iteration % this.#size) + 1;
       const col = (Math.ceil(iteration / this.#size) % (row === this.#size ? this.#size - 1 : this.#size)) + 1;
+      permutation.push(tiles[index].id);
       tiles[index].classList.value = `tile row-${row} col-${col}`;
       tiles.splice(index, 1);
       iteration++;
     }
-  }
 
-  shuffle() {
-    
+    const nums = permutation.map((t) => parseInt(t.slice(1), 10));
+    let inversions = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+        if (nums[i] > nums[j]) {
+          inversions++;
+        }
+      }
+    }
+
+    console.log(inversions % 2);
+
+    if (inversions % 2 !== 0) this.randomize();
   }
 
   check() {
