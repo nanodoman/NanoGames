@@ -72,6 +72,7 @@ class Game {
   resetGame() {
     this.#moves = 0;
     this.#time = 0;
+    this.moveCount.value = this.#moves;
     this.timeDisplay.innerText = '00:00';
     this.startButton.innerText = 'Start';
     clearInterval(this.#timer);
