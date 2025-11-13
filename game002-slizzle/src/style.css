@@ -1,0 +1,149 @@
+@import './styles/grid-layout.css';
+@import './styles/tile-mapping.css';
+
+:root {
+  --size: 3;
+
+  /* melon skin*/
+  --melon-1: #6a994e;
+  --melon-2: #a7c957;
+  --melon-3: #b5e48c;
+  --melon-4: #d9f99d;
+  --melon-5: #f28c28;
+  --melon-6: #fdf7e3;
+  --melon-7: #2b2b2b;
+}
+
+body {
+  font: 600 16px/1 'Trebuchet MS', Verdana, sans-serif;
+  background-color: var(--melon-6);
+  -webkit-user-select: none;
+  user-select: none;
+  color: var(--melon-7);
+}
+
+#frame {
+  position: relative;
+  margin-inline: auto;
+  width: clamp(300px, 50vw, 512px);
+  border-radius: 1em;
+  border-width: 1em;
+  border-style: solid;
+  border-color: var(--melon-2) var(--melon-1) var(--melon-1) var(--melon-2);
+  outline: 2px outset var(--melon-1);
+  background-color: var(--melon-5);
+  box-shadow: 1em 1em 2em var(--melon-7);
+}
+
+#game {
+  display: grid;
+  aspect-ratio: 1;
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-template-rows: repeat(var(--size), 1fr);
+  gap: 1px;
+  padding: 2px;
+}
+
+.tile {
+  aspect-ratio: 1;
+  color: var(--melon-6);
+  text-shadow: 2px 2px 1px var(--melon-7);
+  background-image: url(../assets/Copilot_20251111_213521.png);
+  background-size: calc(var(--size) * 100%) calc(var(--size) * 100%);
+  vertical-align: bottom;
+}
+
+#menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  background-color: var(--melon-4);
+}
+
+span {
+  border-radius: 1em;
+  background-color: var(--melon-6);
+  padding: 0.5em 1em;
+  border: 1px inset var(--melon-4);
+}
+
+button {
+  flex-basis: clamp(7ch, 100px, 25%);
+  border: none;
+  font: inherit;
+  font-size: inherit;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  color: inherit;
+  background-color: var(--melon-5);
+}
+
+#options-button {
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  background: var(--melon-2);
+  anchor-name: --settings;
+  z-index: 10;
+
+  &:has(+ :popover-open) {
+    width: 120px;
+
+    &::after {
+      content: 'Settings';
+      margin-inline-start: 1ch;
+    }
+  }
+}
+
+#settings {
+  position: absolute;
+  inset: unset;
+  top: anchor(bottom);
+  right: anchor(right);
+  left: anchor(left);
+  background: var(--melon-2);
+  width: 120px;
+  position-anchor: --settings;
+  border: none;
+  border-radius: 1em;
+  padding: unset;
+
+  menu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: unset;
+  }
+
+  label {
+    display: block;
+    padding: 0.5em 0.5em;
+    color: var(--melon-7);
+  }
+}
+
+input:is([type='checkbox'], [type='radio']) {
+  accent-color: var(--melon-5);
+}
+
+#frame:has(#tile-nums:not(:checked)) .tile {
+  color: transparent;
+  text-shadow: none;
+}
+
+span:has(#move-count)::before {
+  content: '\21C4';
+  margin-inline-end: 1ch;
+}
+
+#time-display::before {
+  content: '\23F1';
+  margin-inline-end: 1ch;
+}
+
+span:has(#move-count),
+#time-display {
+  text-wrap: nowrap;
+}

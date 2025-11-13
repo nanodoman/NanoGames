@@ -4,260 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slizzle &mdash; slide puzzle</title>
-
-    <style>
-      :root {
-        /* melon skin*/
-        --melon-1: #6a994e;
-        --melon-2: #a7c957;
-        --melon-3: #b5e48c;
-        --melon-4: #d9f99d;
-        --melon-5: #f28c28;
-        --melon-6: #fdf7e3;
-        --melon-7: #2b2b2b;
-      }
-
-      body {
-        font: 600 16px/1 'Trebuchet MS', Verdana, sans-serif;
-        background-color: var(--melon-6);
-        -webkit-user-select: none;
-        user-select: none;
-        color: var(--melon-7);
-      }
-
-      #frame {
-        margin-inline: auto;
-        width: min-content;
-        border-radius: 1em;
-        border-width: 1em;
-        border-style: solid;
-        border-color: var(--melon-2) var(--melon-1) var(--melon-1) var(--melon-2);
-        outline: 2px outset var(--melon-1);
-        background-color: var(--melon-5);
-      }
-
-      #game {
-        --tiles: 3;
-
-        display: grid;
-        aspect-ratio: 1;
-        grid-template-columns: repeat(var(--tiles), 1fr);
-        grid-template-rows: repeat(var(--tiles), 1fr);
-        gap: 1px;
-        padding: 2px;
-      }
-
-      .tile {
-        aspect-ratio: 1;
-        width: clamp(32px, 50vw, calc(512px / var(--tiles)));
-        background-image: url(./Copilot_20251111_213521.png);
-        background-size: calc(var(--tiles) * 100%) calc(var(--tiles) * 100%);
-
-        &:nth-child(1) {
-          background-position: 0% 0%;
-        }
-        &:nth-child(2) {
-          background-position: 50% 0%;
-        }
-        &:nth-child(3) {
-          background-position: 100% 0%;
-        }
-        &:nth-child(4) {
-          background-position: 0% 50%;
-        }
-        &:nth-child(5) {
-          background-position: 50% 50%;
-        }
-        &:nth-child(6) {
-          background-position: 100% 50%;
-        }
-        &:nth-child(7) {
-          background-position: 0% 100%;
-        }
-        &:nth-child(8) {
-          background-position: 50% 100%;
-        }
-        &:nth-child(9) {
-          background-position: 100% 100%;
-        }
-
-        &.row-1 {
-          grid-row: 1;
-        }
-        &.row-2 {
-          grid-row: 2;
-        }
-        &.row-3 {
-          grid-row: 3;
-        }
-        &.row-4 {
-          grid-row: 4;
-        }
-        &.row-5 {
-          grid-row: 5;
-        }
-        &.col-1 {
-          grid-column: 1;
-        }
-        &.col-2 {
-          grid-column: 2;
-        }
-        &.col-3 {
-          grid-column: 3;
-        }
-        &.col-4 {
-          grid-column: 4;
-        }
-        &.col-5 {
-          grid-column: 5;
-        }
-      }
-
-      #menu {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1em 2em;
-        background-color: var(--melon-4);
-      }
-
-      span {
-        border-radius: 1em;
-        background-color: var(--melon-6);
-        padding: 0.5em 1em;
-        border: 1px inset var(--melon-4);
-      }
-
-      button#start-button {
-        flex-basis: clamp(7ch, 100px, 25%);
-        border: none;
-        font: inherit;
-        font-size: inherit;
-        border-radius: 1em;
-        padding: 0.5em 1em;
-        color: inherit;
-        background-color: var(--melon-5);
-      }
-    </style>
-
-    <script defer>
-      let initialized = false;
-      let moves = 0;
-      let time = 0;
-      let timer;
-      const empty = {
-        row: undefined,
-        col: undefined,
-      };
-
-      function init() {
-        staticTile = document.querySelector('.tile.static');
-        staticTile.style.visibility = 'hidden';
-
-        empty.row = 3;
-        empty.col = 3;
-        randomize();
-        moves = 0;
-        time = 0;
-        initialized = true;
-        clearInterval(timer);
-        document.querySelector('#time-display').innerText = `00:00`;
-        timer = setInterval(() => {
-          time++;
-          const min = String(Math.floor(time / 60)).padStart(2, '0');
-          const sec = String(time % 60).padStart(2, '0');
-          document.querySelector('#time-display').innerText = `${min}:${sec}`;
-        }, 1000);
-        document.querySelector('#move-count').value = moves;
-        document.querySelector('#start-button').innerText = 'Restart';
-      }
-
-      function randomize() {
-        const tiles = [...document.querySelectorAll('.tile:not(.static)')];
-        let iteration = 0;
-
-        while (tiles.length) {
-          const index = Math.round(Math.random() * 10) % tiles.length;
-          const row = (iteration % 3) + 1;
-          const col = (Math.ceil(iteration / 3) % (row === 3 ? 2 : 3)) + 1;
-          tiles[index].classList.value = `tile row-${row} col-${col}`;
-          tiles.splice(index, 1);
-          iteration++;
-        }
-      }
-
-      function slide({ target: tile }) {
-        if (!initialized || !tile.classList.contains('tile')) return;
-
-        const row = +tile.classList.value.match(/row-(\d+)/)[1];
-        const col = +tile.classList.value.match(/col-(\d+)/)[1];
-
-        if (!isAdjacent(row, col)) return;
-
-        tile.classList.value = `tile row-${empty.row} col-${empty.col}`;
-        empty.row = row;
-        empty.col = col;
-
-        moves++;
-        document.querySelector('#move-count').value = moves;
-        check();
-      }
-
-      function isAdjacent(row, col) {
-        if (empty.row === row) {
-          return Math.abs(empty.col - col) === 1;
-        }
-
-        if (empty.col === col) {
-          return Math.abs(empty.row - row) === 1;
-        }
-
-        return false;
-      }
-
-      function check() {
-        const conditions = [
-          document.querySelector('#t1').classList.value === 'tile row-1 col-1',
-          document.querySelector('#t2').classList.value === 'tile row-1 col-2',
-          document.querySelector('#t3').classList.value === 'tile row-1 col-3',
-          document.querySelector('#t4').classList.value === 'tile row-2 col-1',
-          document.querySelector('#t5').classList.value === 'tile row-2 col-2',
-          document.querySelector('#t6').classList.value === 'tile row-2 col-3',
-          document.querySelector('#t7').classList.value === 'tile row-3 col-1',
-          document.querySelector('#t8').classList.value === 'tile row-3 col-2',
-        ].includes(false);
-
-        if (conditions === false) {
-          /* win */
-          clearInterval(timer);
-          staticTile = document.querySelector('.tile.static');
-          staticTile.style.visibility = 'visible';
-          initialized = false;
-          empty.row = undefined;
-          empty.col = undefined;
-          document.querySelector('#start-button').innerText = 'Start';
-        }
-      }
-    </script>
+    <script defer src="src/main.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
   </head>
 
   <body>
     <div id="frame">
-      <div id="game" onclick="slide(event)">
-        <div id="t1" class="tile row-1 col-1"></div>
-        <div id="t2" class="tile row-1 col-2"></div>
-        <div id="t3" class="tile row-1 col-3"></div>
-        <div id="t4" class="tile row-2 col-1"></div>
-        <div id="t5" class="tile row-2 col-2"></div>
-        <div id="t6" class="tile row-2 col-3"></div>
-        <div id="t7" class="tile row-3 col-1"></div>
-        <div id="t8" class="tile row-3 col-2"></div>
-        <div id="t9" class="tile row-3 col-3 static"></div>
+      <button id="options-button" popovertarget="settings">&#9881;</button>
+
+      <div id="settings" popover>
+        <menu>
+          <li>
+            <label><input id="tile-nums" type="checkbox" />Tile nums</label>
+          </li>
+          <li>
+            <label
+              ><input
+                id="grid3"
+                type="radio"
+                name="size"
+                value="3"
+                onchange="GAME?.changeGrid(value)"
+                checked
+              />3x3</label
+            >
+          </li>
+          <li>
+            <label><input id="grid4" type="radio" name="size" value="4" onchange="GAME?.changeGrid(value)" />4x4</label>
+          </li>
+          <li>
+            <label><input id="grid5" type="radio" name="size" value="5" onchange="GAME?.changeGrid(value)" />5x5</label>
+          </li>
+        </menu>
       </div>
+      <div id="game" onclick="GAME?.slide(event)"></div>
       <div id="menu">
-        <span><output id="move-count">0</output> Moves</span>
+        <span><output id="move-count">0</output></span>
         <span id="time-display">00:00</span>
-        <button id="start-button" onclick="init()">Start</button>
+        <button id="start-button" onclick="GAME?.initialize()">Start</button>
       </div>
     </div>
   </body>
