@@ -93,6 +93,10 @@ class Game {
     }
   }
 
+  shuffle() {
+    
+  }
+
   check() {
     const tiles = document.querySelectorAll('.tile:not(.static)');
     const allCorrect = Array.from(tiles).every((tile, index) => {
