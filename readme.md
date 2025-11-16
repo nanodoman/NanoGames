@@ -1,6 +1,6 @@
 # NanoGames
 
-Monorepo
+Monorepo...
 
 Play now: [Live demo on GitHub Pages](https://nanodoman.github.io/NanoGames/)
 
@@ -8,5 +8,5 @@ Play now: [Live demo on GitHub Pages](https://nanodoman.github.io/NanoGames/)
 
 | Index | Title  |
 | ----: | ------ |
-| 001   | Snake  |
-| 002   | Puzzle |
+|   001 | Snake  |
+|   002 | Puzzle |
