@@ -1,5 +1,13 @@
 # Changelog WIP
 
+## v3.0.1 Nov 16 2025
+
+### Game002
+
+#### fix
+
+- solvable 5x5
+
 ## v3.0.0 Nov 16 2025
 
 ### Main screen

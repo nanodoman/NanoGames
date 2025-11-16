@@ -105,9 +105,7 @@ class Game {
       }
     }
 
-    console.log(inversions % 2);
-
-    if (inversions % 2 !== 0) this.randomize();
+    if (inversions % 2 !== (this.#size === 5 ? 1 : 0)) this.randomize();
   }
 
   check() {
