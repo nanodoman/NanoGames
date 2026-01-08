@@ -10,13 +10,18 @@
 
   <body onload="buildArea()" onkeydown="move(event)">
     <header>
-      <h1 id="menu">
-        Score: <output id="score">0</output>
-      </h1>
+      <h1 id="menu">Score: <output id="score">0</output></h1>
     </header>
 
     <main>
       <div id="area"></div>
     </main>
+
+    <section id="controls">
+      <button type="button" class="arrow up" onclick="move({ code: 'ArrowUp'})">&triangle;</button>
+      <button type="button" class="arrow down" onclick="move({ code: 'ArrowDown' })">&triangledown;</button>
+      <button type="button" class="arrow left" onclick="move({ code: 'ArrowLeft'})">&triangleleft;</button>
+      <button type="button" class="arrow right" onclick="move({ code: 'ArrowRight' })">&triangleright;</button>
+    </section>
   </body>
 </html>

@@ -21,24 +21,24 @@ function buildArea() {
 
 start = setInterval(game, speed);
 
-function move(event) {
-  switch (event.keyCode) {
-    case 37: //--left--
+function move({ code }) {
+  switch (code) {
+    case 'ArrowLeft':
       if (gameDir != 'right') {
         dir = 'left';
       }
       break;
-    case 38: //--up--
+    case 'ArrowUp':
       if (gameDir != 'down') {
         dir = 'up';
       }
       break;
-    case 39: //--right--
+    case 'ArrowRight':
       if (gameDir != 'left') {
         dir = 'right';
       }
       break;
-    case 40: //--down--
+    case 'ArrowDown':
       if (gameDir != 'up') {
         dir = 'down';
       }

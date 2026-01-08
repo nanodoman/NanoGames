@@ -1,8 +1,10 @@
 :root {
-  --color-text: #fff;
-  --color-foreground: #fff;
+  --color-text: #e6e6e6;
+  --color-foreground: #666;
+  --color-foreground-light: #aaa;
   --color-background: #333;
   --color-primary: #8fbc8f;
+  --color-secondary: #fff; /* #525c3d; */
   --color-accent: #ffae52;
   --color-border: #aaccff;
 
@@ -16,7 +18,7 @@ body {
 
 #area {
   border: 0.5rem inset var(--color-border);
-  background: var(--color-foreground);
+  background: var(--color-secondary);
   border-radius: 1rem;
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
@@ -25,6 +27,41 @@ body {
 .cell {
   border-radius: 50%;
   aspect-ratio: 1;
+}
+
+#controls {
+  margin-top: 1rem;
+  margin-inline: auto;
+  width: min-content;
+  display: grid;
+  gap: 0.5rem;
+  grid-template:
+    '. u .' 4rem
+    'l . r' 4rem
+    '. d .' 4rem / 4rem 4rem 4rem;
+}
+
+.arrow {
+  padding: 0;
+  border: outset;
+  border-radius: 0.25rem;
+  aspect-ratio: 1;
+  font-size: 3rem;
+  color: var(--color-text);
+  background-color: var(--color-foreground);
+
+  &.up {
+    grid-area: u;
+  }
+  &.down {
+    grid-area: d;
+  }
+  &.left {
+    grid-area: l;
+  }
+  &.right {
+    grid-area: r;
+  }
 }
 
 header,
@@ -44,4 +81,10 @@ main {
 
 .point {
   background: var(--color-accent);
+}
+
+@media (width >= 768px) {
+  #controls {
+    display: none;
+  }
 }
