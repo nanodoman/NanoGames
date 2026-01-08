@@ -17,14 +17,11 @@ function buildArea() {
     area.innerHTML +=
       "<div id='pos" + Math.floor((i - 1) / Math.sqrt(size)) + ((i - 1) % Math.sqrt(size)) + "' class='cell'></div>";
   }
-  area.style.width = Math.sqrt(size) * 10 + 'px';
-  area.style.height = Math.sqrt(size) * 10 + 'px';
 }
 
 start = setInterval(game, speed);
 
 function move(event) {
-  //		console.log(event.keyCode)
   switch (event.keyCode) {
     case 37: //--left--
       if (gameDir != 'right') {
@@ -137,6 +134,4 @@ function gameOver() {
     x[i].style.background = '#ff0000';
     x[i].style.filter = 'opacity(0.4)';
   }
-  clearInterval(start);
-  // console.log('Game Over');
 }

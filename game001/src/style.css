@@ -1,46 +1,47 @@
-html {
-  background: #333;
+:root {
+  --color-text: #fff;
+  --color-foreground: #fff;
+  --color-background: #333;
+  --color-primary: #8fbc8f;
+  --color-accent: #ffae52;
+  --color-border: #aaccff;
+
+  color: var(--color-text);
 }
 
-body > div {
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  margin-top: 2em;
+body {
+  background: var(--color-background);
+  margin: 0 2rem;
 }
 
 #area {
-  border: 2px inset #aaccff;
-  background: white;
-  border-radius: 5px;
+  border: 0.5rem inset var(--color-border);
+  background: var(--color-foreground);
+  border-radius: 1rem;
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
 }
 
 .cell {
-  box-sizing: border-box;
-  width: 10px;
-  height: 10px;
   border-radius: 50%;
+  aspect-ratio: 1;
 }
 
-#menu {
-  margin-top: 1em;
-  height: auto;
-  justify-content: center;
-  color: white;
-}
-
-p {
-  margin: 0;
+header,
+main {
+  margin-inline: auto;
+  width: clamp(256px, 50%, 512px);
 }
 
 .myPos {
-  background: #00ff00;
+  background: var(--color-primary);
 }
 
 .tail {
-  background: #00ff00;
+  background: var(--color-primary);
   filter: opacity(0.4);
 }
+
 .point {
-  background: #00ffff;
+  background: var(--color-accent);
 }
