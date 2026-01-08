@@ -1,0 +1,46 @@
+html {
+  background: #333;
+}
+
+body > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-top: 2em;
+}
+
+#area {
+  border: 2px inset #aaccff;
+  background: white;
+  border-radius: 5px;
+}
+
+.cell {
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+#menu {
+  margin-top: 1em;
+  height: auto;
+  justify-content: center;
+  color: white;
+}
+
+p {
+  margin: 0;
+}
+
+.myPos {
+  background: #00ff00;
+}
+
+.tail {
+  background: #00ff00;
+  filter: opacity(0.4);
+}
+.point {
+  background: #00ffff;
+}
