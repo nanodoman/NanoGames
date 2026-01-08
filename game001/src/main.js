@@ -1,25 +1,46 @@
-var x = 3;
-var y = 0;
-var pos = 'pos' + x + y;
-var dir = 'right';
-var divs = '';
-var tail = '';
-var tails = [];
-var sLen = 1;
-var tic = 1;
-var scoreVal = 0;
-var speed = 200;
-var point = '';
-var size = 100;
+let x = 3;
+let y = 0;
+let pos = 'pos' + x + y;
+let dir = 'right';
+let divs = '';
+let tail = '';
+let tails = [];
+let sLen = 1;
+let tic = 1;
+let scoreVal = 0;
+let speed = 200;
+let point = '';
+let size = 100;
 
 function buildArea() {
+  area.innerHTML = '';
+
   for (i = 1; i <= size; i++) {
     area.innerHTML +=
       "<div id='pos" + Math.floor((i - 1) / Math.sqrt(size)) + ((i - 1) % Math.sqrt(size)) + "' class='cell'></div>";
   }
 }
 
-start = setInterval(game, speed);
+let start = setInterval(game, speed);
+
+function restart() {
+  buildArea();
+  clearInterval(start);
+  x = 3;
+  y = 0;
+  pos = 'pos' + x + y;
+  dir = 'right';
+  divs = '';
+  tail = '';
+  tails = [];
+  sLen = 1;
+  tic = 1;
+  scoreVal = 0;
+  speed = 200;
+  point = '';
+  size = 100;
+  start = setInterval(game, speed);
+}
 
 function move({ code }) {
   switch (code) {

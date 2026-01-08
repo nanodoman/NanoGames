@@ -16,6 +16,23 @@ body {
   margin: 0 2rem;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#reload {
+  font-size: 2rem;
+  aspect-ratio: 1;
+  width: 3rem;
+  padding: 0;
+  align-self: center;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 #area {
   border: 0.5rem inset var(--color-border);
   background: var(--color-secondary);
