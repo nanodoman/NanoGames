@@ -57,7 +57,6 @@ function speedUp() {
 }
 function game() {
   tic++;
-  score.innerText = scoreVal;
   gameDir = dir;
   if (tic % 15 == 0) {
     point = spawnPoint();
@@ -125,6 +124,8 @@ function game() {
   if (point != '') {
     document.getElementById(point).classList.add('point');
   }
+
+  score.value = scoreVal;
 }
 function gameOver() {
   clearInterval(start);
