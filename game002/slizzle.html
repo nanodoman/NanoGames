@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slizzle &mdash; slide puzzle</title>
-    <script defer src="src/main.js?v=2.1.2"></script>
-    <link rel="stylesheet" href="src/style.css?v=2.1.2" />
+    <script defer src="src/main.js?v=2.2.0"></script>
+    <link rel="stylesheet" href="src/style.css?v=2.2.0" />
   </head>
 
   <body>
@@ -18,19 +18,10 @@
             <label><input id="tile-nums" type="checkbox" />Tile nums</label>
           </li>
           <li>
-            <label
-              ><input
-                id="grid3"
-                type="radio"
-                name="size"
-                value="3"
-                onchange="GAME?.changeGrid(value)"
-                checked
-              />3x3</label
-            >
+            <label><input id="grid3" type="radio" name="size" value="3" onchange="GAME?.changeGrid(value)" />3x3</label>
           </li>
           <li>
-            <label><input id="grid4" type="radio" name="size" value="4" onchange="GAME?.changeGrid(value)" />4x4</label>
+            <label><input id="grid4" type="radio" name="size" value="4" onchange="GAME?.changeGrid(value)" checked />4x4</label>
           </li>
           <li>
             <label><input id="grid5" type="radio" name="size" value="5" onchange="GAME?.changeGrid(value)" />5x5</label>

@@ -1,5 +1,5 @@
 class Game {
-  #size = 3;
+  #size = 4;
   #sizeOptions = Object.freeze([3, 4, 5]);
   #playing = false;
   #moves = 0;
@@ -55,7 +55,7 @@ class Game {
     this.setupTiles(size);
   }
 
-  setupTiles(size = 3) {
+  setupTiles(size = 4) {
     if (this.#sizeOptions.includes(+size)) {
       this.#size = +size;
       this.game.replaceChildren();
