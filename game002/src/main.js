@@ -29,6 +29,13 @@ class Game {
     this.setupTiles();
   }
 
+  get formattedTime() {
+    const min = String(Math.floor(this.#time / 60)).padStart(2, '0');
+    const sec = String(this.#time % 60).padStart(2, '0');
+
+    return `${min}:${sec}`;
+  }
+
   initialize() {
     this.#playing = true;
     this.resetGame();
@@ -65,7 +72,7 @@ class Game {
         if (last) tile.classList.add('static');
         tile.innerText = tileNumber;
 
-        this.game.insertAdjacentElement('beforeEnd', tile);
+        this.game.insertAdjacentElement('beforeend', tile);
       }
     }
   }
@@ -108,6 +115,14 @@ class Game {
     if (inversions % 2 !== (this.#size === 5 ? 1 : 0)) this.randomize();
   }
 
+  addRecord() {
+    const records = document.querySelector('#records #entries');
+    const entry = document.createElement('li');
+    entry.classList.add('record-entry');
+    entry.innerHTML = `<span>⇄ ${this.#moves}</span> <span>⏱ ${this.formattedTime}</span>`;
+    records.insertAdjacentElement('afterbegin', entry);
+  }
+
   check() {
     const tiles = document.querySelectorAll('.tile:not(.static)');
     const allCorrect = Array.from(tiles).every((tile, index) => {
@@ -122,6 +137,7 @@ class Game {
 
     if (allCorrect) {
       clearInterval(this.#timer);
+      this.addRecord();
       const staticTile = document.querySelector('.tile.static');
       staticTile.style.visibility = 'visible';
       this.#playing = false;
@@ -132,9 +148,7 @@ class Game {
 
   #incrementTime() {
     this.#time++;
-    const min = String(Math.floor(this.#time / 60)).padStart(2, '0');
-    const sec = String(this.#time % 60).padStart(2, '0');
-    this.timeDisplay.innerText = `${min}:${sec}`;
+    this.timeDisplay.innerText = this.formattedTime;
   }
 
   #incrementMoveCount() {

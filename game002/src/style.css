@@ -15,24 +15,35 @@
 }
 
 body {
-  font: 600 16px/1 'Trebuchet MS', Verdana, sans-serif;
+  font:
+    600 16px/1 'Trebuchet MS',
+    Verdana,
+    sans-serif;
   background-color: var(--melon-6);
   -webkit-user-select: none;
   user-select: none;
   color: var(--melon-7);
 }
 
-#frame {
-  position: relative;
+.frame {
   margin-inline: auto;
   width: clamp(300px, 50vw, 512px);
+  box-shadow: 1em 1em 2em var(--melon-7);
   border-radius: 1em;
+
+  outline: 2px outset var(--melon-1);
+
+  + .frame {
+    margin-top: 2em;
+  }
+}
+
+main {
+  position: relative;
   border-width: 1em;
   border-style: solid;
   border-color: var(--melon-2) var(--melon-1) var(--melon-1) var(--melon-2);
-  outline: 2px outset var(--melon-1);
   background-color: var(--melon-5);
-  box-shadow: 1em 1em 2em var(--melon-7);
 }
 
 #game {
@@ -57,15 +68,21 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 2em;
+  padding: 1em;
   background-color: var(--melon-4);
+  gap: 0.5em;
 }
 
-span {
+.text {
   border-radius: 1em;
   background-color: var(--melon-6);
   padding: 0.5em 1em;
   border: 1px inset var(--melon-4);
+}
+
+#menu .text {
+  flex-grow: 1;
+  text-align: center;
 }
 
 button {
@@ -146,4 +163,29 @@ span:has(#move-count)::before {
 span:has(#move-count),
 #time-display {
   text-wrap: nowrap;
+}
+
+#records {
+  padding: 0.5em;
+
+  &:has(#entries:empty) {
+    display: none;
+  }
+}
+
+#entries {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  max-height: 8.2em;
+  padding-inline: 4em;
+}
+
+.record-entry {
+  display: flex;
+  padding: 0.5em 0;
+  justify-content: space-between;
+
+  + .record-entry {
+    border-top: 1px dashed var(--melon-1);
+  }
 }

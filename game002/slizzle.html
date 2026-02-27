@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div id="frame">
+    <main class="frame">
       <button id="options-button" popovertarget="settings">&#9881;</button>
 
       <div id="settings" popover>
@@ -37,12 +37,22 @@
           </li>
         </menu>
       </div>
-      <div id="game" onclick="GAME?.slide(event)"></div>
+      <div id="game" onmousedown="GAME?.slide(event)"></div>
       <div id="menu">
-        <span><output id="move-count">0</output></span>
-        <span id="time-display">00:00</span>
+        <span class="text"><output id="move-count">0</output></span>
+        <span class="text" id="time-display">00:00</span>
         <button id="start-button" onclick="GAME?.initialize()">Start</button>
       </div>
-    </div>
+    </main>
+
+    <section id="records" class="frame">
+      <p align="center">
+        <label>
+          Records
+          <input type="checkbox" name="records-view" hidden />
+        </label>
+      </p>
+      <ul id="entries"></ul>
+    </section>
   </body>
 </html>
