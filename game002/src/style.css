@@ -177,7 +177,7 @@ span:has(#move-count),
   overflow-y: auto;
   scrollbar-width: thin;
   max-height: 8.2em;
-  padding-inline: 4em;
+  padding-inline: 2em;
 }
 
 .record-entry {

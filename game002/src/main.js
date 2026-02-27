@@ -119,7 +119,10 @@ class Game {
     const records = document.querySelector('#records #entries');
     const entry = document.createElement('li');
     entry.classList.add('record-entry');
-    entry.innerHTML = `<span>⇄ ${this.#moves}</span> <span>⏱ ${this.formattedTime}</span>`;
+    entry.innerHTML = `
+      <span>&boxplus; ${this.#size}</span>
+      <span>&RightArrowLeftArrow; ${this.#moves}</span>
+      <span>&#x23F1; ${this.formattedTime}</span>`;
     records.insertAdjacentElement('afterbegin', entry);
   }
 
