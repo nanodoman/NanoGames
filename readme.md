@@ -9,4 +9,4 @@ Play now: [Live demo on GitHub Pages](https://nanodoman.github.io/NanoGames/)
 | Index | Title  | Version |
 | ----: | ------ | :-----: |
 |   001 | Snake  |    2    |
-|   002 | Puzzle |   2.1   |
+|   002 | Puzzle |  2.1.1  |

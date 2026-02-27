@@ -145,7 +145,7 @@ input:is([type='checkbox'], [type='radio']) {
   accent-color: var(--melon-5);
 }
 
-#frame:has(#tile-nums:not(:checked)) .tile {
+main:has(#tile-nums:not(:checked)) .tile {
   color: transparent;
   text-shadow: none;
 }
