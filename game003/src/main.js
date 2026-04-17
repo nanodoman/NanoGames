@@ -1,21 +1,28 @@
 const grid = document.querySelector('.grid');
 const hexes = document.querySelectorAll('.hex');
 
-function init() {
-  grid.addEventListener('mousedown', interact);
-  document.addEventListener('mousedown', reset);
-}
+const activePointers = new Set();
 
-function interact(event) {
-  event.target.classList.add('hit');
-}
+grid.addEventListener('pointerdown', (e) => {
+  if (!e.target.classList.contains('hex')) return;
+  activePointers.add(e.pointerId);
+  e.target.classList.add('hit');
+});
 
-function reset(event) {
-  if (!event.target.classList.contains(['reset'])) return;
+grid.addEventListener('pointerover', (e) => {
+  if (activePointers.has(e.pointerId) && e.target.classList.contains('hex')) {
+    e.target.classList.add('hit');
+  }
+});
+
+document.addEventListener('pointerup', (e) => {
+  activePointers.delete(e.pointerId);
+});
+
+document.body.addEventListener('pointerdown', (event) => {
+  if (event.target.closest('.grid')) return;
 
   for (const hex of hexes) {
     hex.classList.remove('hit');
   }
-}
-
-init();
+});
