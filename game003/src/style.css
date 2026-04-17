@@ -32,7 +32,6 @@ body {
   gap: 0 var(--gap);
   display: flex;
   justify-content: center;
-  pointer-events: none;
 
   & ~ & {
     margin-top: var(--margin);
@@ -40,13 +39,10 @@ body {
 }
 
 .hex {
-  position: relative; /* force hitbox for iOS */
-  background-color: rgba(0, 0, 0, 0.001); /* force hitbox for iOS */
   background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
   aspect-ratio: var(--aspect);
   flex: 0 0 var(--cell);
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-  pointer-events: all;
 
   &:hover:not(.hit) {
     --color-primary: var(--color-background);
@@ -58,13 +54,6 @@ body {
 
   &.hit {
     filter: brightness(0.5) grayscale(1);
-  }
-
-  /* force hitbox for iOS */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
   }
 }
 
