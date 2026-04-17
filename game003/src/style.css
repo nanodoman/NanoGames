@@ -39,6 +39,7 @@ body {
 }
 
 .hex {
+  background-color: rgba(0,0,0,0.001); /* force hitbox on element for iOS */
   background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
   aspect-ratio: var(--aspect);
   flex: 0 0 var(--cell);
