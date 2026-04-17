@@ -3,6 +3,10 @@ const hexes = document.querySelectorAll('.hex');
 
 const activePointers = new Set();
 
+grid.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+}, { passive: false });
+
 grid.addEventListener('pointerdown', (e) => {
   if (!e.target.classList.contains('hex')) return;
   e.preventDefault();
