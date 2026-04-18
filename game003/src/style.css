@@ -12,6 +12,11 @@
   --shadow-spread: 2px;
 }
 
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 body {
   touch-action: manipulation;
   margin: 0;
@@ -26,6 +31,7 @@ body {
   width: min-content;
   margin-inline: auto;
   filter: drop-shadow(0 0 var(--shadow-spread) var(--color-glow));
+  clip-path: polygon(0 20%, 40% 0, 60% 0, 100% 20%, 100% 80%, 60% 100%, 40% 100%, 0 80%);
 }
 
 .row {
@@ -39,24 +45,12 @@ body {
 }
 
 .hex {
-  all: unset;
-  display: block;
-  position: relative;
   flex: 0 0 var(--cell);
   aspect-ratio: var(--aspect);
   background-color: #00000001;
   background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-  transition: all 0.05s;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-  border: none;
-
-  &:focus,
-  &:active {
-    outline: none;
-    border: none;
-  }
+  transition: filter, scale, 0.2s;
 
   &:hover:not(.hit) {
     --color-primary: var(--color-secondary);
@@ -70,8 +64,6 @@ body {
 
 .grid,
 .hex {
-  -webkit-user-select: none;
   -webkit-touch-callout: none;
-  user-select: none;
   touch-action: none;
 }
