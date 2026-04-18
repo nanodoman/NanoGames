@@ -24,8 +24,12 @@ window.addEventListener('pointerup', (e) => {
   activePointers.delete(e.pointerId);
 });
 
-window.addEventListener('pointerdown', (e) => {
-  if (e.target.closest('.grid')) return;
+window.addEventListener('pointercancel', (e) => {
+  activePointers.delete(e.pointerId);
+});
 
-  hexes.forEach((hex) => hex.classList.remove('hit'));
+window.addEventListener('pointerdown', (e) => {
+  if (e.target.classList.contains('reset')) {
+    hexes.forEach((hex) => hex.classList.remove('hit'));
+  }
 });
