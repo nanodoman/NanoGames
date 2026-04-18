@@ -31,7 +31,6 @@ body {
   width: min-content;
   margin-inline: auto;
   filter: drop-shadow(0 0 var(--shadow-spread) var(--color-glow));
-  clip-path: polygon(0 20%, 40% 0, 60% 0, 100% 20%, 100% 80%, 60% 100%, 40% 100%, 0 80%);
 }
 
 .row {
