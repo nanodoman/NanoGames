@@ -3,12 +3,12 @@
   --color-secondary: hotpink;
   --color-accent: blueviolet;
   --color-background: steelblue;
+  --color-glow: color-mix(in srgb, var(--color-primary), #fff6);
   --cell: clamp(64px, 20vw, 128px);
-  --spread: clamp(8px, calc(20vw / 8), 16px);
-  /* -------- */
+  --spread: calc(var(--cell) / 8);
   --aspect: 1.1547; /* top-flat hex */
   --gap: calc(var(--cell) * 0.5 + var(--spread));
-  --margin: calc(var(--cell) * -0.5 / var(--aspect) + var(--spread) / 2 / var(--aspect));
+  --margin: calc(var(--cell) * -0.52 / var(--aspect) + var(--spread) / 2 / var(--aspect));
   --shadow-spread: 2px;
 }
 
@@ -25,7 +25,7 @@ body {
 .grid {
   width: min-content;
   margin-inline: auto;
-  filter: drop-shadow(0 0 var(--shadow-spread) var(--color-background));
+  filter: drop-shadow(0 0 var(--shadow-spread) var(--color-glow));
 }
 
 .row {
@@ -39,37 +39,28 @@ body {
 }
 
 .hex {
-  position: relative; /* force hitbox for iOS */
+  all: unset;
   flex: 0 0 var(--cell);
   aspect-ratio: var(--aspect);
-  background-color: rgba(0, 0, 0, 0.001);
+  background-color: #00000001;
+  background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  transition: all 0.05s;
 
   &:hover:not(.hit) {
-    --color-primary: var(--color-background);
-  }
-
-  &:active:not(.hit) {
     --color-primary: var(--color-secondary);
   }
 
   &.hit {
-    filter: brightness(0.5) grayscale(1);
-  }
-
-  /* force hitbox for iOS */
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    filter: brightness(0.33) grayscale(0.66);
+    scale: 0.9;
   }
 }
 
 .grid,
 .hex {
-  -webkit-user-select: none; /* iOS Safari */
-  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   user-select: none;
   touch-action: none;
 }

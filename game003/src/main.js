@@ -3,7 +3,7 @@ const hexes = document.querySelectorAll('.hex');
 
 const activePointers = new Set();
 
-grid.addEventListener('pointerdown', e => {
+grid.addEventListener('pointerdown', (e) => {
   const hex = e.target.closest('.hex');
   if (!hex) return;
 
@@ -11,7 +11,7 @@ grid.addEventListener('pointerdown', e => {
   hex.classList.add('hit');
 });
 
-grid.addEventListener('pointermove', e => {
+grid.addEventListener('pointermove', (e) => {
   if (!activePointers.has(e.pointerId)) return;
 
   const hex = e.target.closest('.hex');
@@ -20,11 +20,11 @@ grid.addEventListener('pointermove', e => {
   hex.classList.add('hit');
 });
 
-window.addEventListener('pointerup', e => {
+window.addEventListener('pointerup', (e) => {
   activePointers.delete(e.pointerId);
 });
 
-document.body.addEventListener('pointerdown', (e) => {
+window.addEventListener('pointerdown', (e) => {
   if (e.target.closest('.grid')) return;
 
   hexes.forEach((hex) => hex.classList.remove('hit'));
