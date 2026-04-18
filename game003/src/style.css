@@ -32,6 +32,7 @@ body {
   gap: 0 var(--gap);
   display: flex;
   justify-content: center;
+  pointer-events: none;
 
   & ~ & {
     margin-top: var(--margin);
@@ -39,10 +40,9 @@ body {
 }
 
 .hex {
-  background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
-  aspect-ratio: var(--aspect);
+  position: relative; /* force hitbox for iOS */
   flex: 0 0 var(--cell);
-  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  aspect-ratio: var(--aspect);
 
   &:hover:not(.hit) {
     --color-primary: var(--color-background);
@@ -54,6 +54,17 @@ body {
 
   &.hit {
     filter: brightness(0.5) grayscale(1);
+  }
+
+  /* force hitbox for iOS */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    display: block;
+    pointer-events: all;
   }
 }
 
