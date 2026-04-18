@@ -3,23 +3,24 @@ const hexes = document.querySelectorAll('.hex');
 
 const activePointers = new Set();
 
-grid.addEventListener('pointerdown', (e) => {
+grid.addEventListener('pointerdown', e => {
   const hex = e.target.closest('.hex');
   if (!hex) return;
 
-  e.preventDefault();
   activePointers.add(e.pointerId);
   hex.classList.add('hit');
 });
 
-grid.addEventListener('pointerover', (e) => {
+grid.addEventListener('pointermove', e => {
+  if (!activePointers.has(e.pointerId)) return;
+
   const hex = e.target.closest('.hex');
-  if (!hex || !activePointers.has(e.pointerId)) return;
+  if (!hex) return;
 
   hex.classList.add('hit');
 });
 
-window.addEventListener('pointerup', (e) => {
+window.addEventListener('pointerup', e => {
   activePointers.delete(e.pointerId);
 });
 
