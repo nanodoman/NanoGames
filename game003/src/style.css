@@ -40,12 +40,23 @@ body {
 
 .hex {
   all: unset;
+  display: block;
+  position: relative;
   flex: 0 0 var(--cell);
   aspect-ratio: var(--aspect);
   background-color: #00000001;
   background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   transition: all 0.05s;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border: none;
+
+  &:focus,
+  &:active {
+    outline: none;
+    border: none;
+  }
 
   &:hover:not(.hit) {
     --color-primary: var(--color-secondary);
