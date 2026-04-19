@@ -5,7 +5,7 @@
     --color-accent: blueviolet;
     --color-background: steelblue;
     --cell: 64px;
-    --spread: 0px;
+    --spread: 10px;
 
     --aspect: 1.1547; /* top-flat hex */
     --gap: calc(var(--cell) * 0.5 + var(--spread));
