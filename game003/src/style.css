@@ -46,6 +46,9 @@ body {
 }
 
 .hex {
+  all: unset;
+  display: block;
+  position: static;
   flex: 0 0 var(--cell);
   aspect-ratio: var(--aspect);
   background-color: #00000001;

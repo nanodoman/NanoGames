@@ -1,8 +1,6 @@
 const hexes = document.querySelectorAll('.hex');
 
 window.addEventListener('pointerdown', (e) => {
-  e.preventDefault();
-
   if (e.target.classList.contains('reset')) {
     for (const hex of hexes) {
       hex.classList.remove('hit');
@@ -10,6 +8,7 @@ window.addEventListener('pointerdown', (e) => {
   }
 
   event.target.closest('.hex')?.classList.add('hit');
+  e.preventDefault();
 });
 
 window.addEventListener('pointerup', (e) => {
