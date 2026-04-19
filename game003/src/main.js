@@ -1,12 +1,17 @@
+const hexes = document.querySelectorAll('.hex');
+
 window.addEventListener('pointerdown', (e) => {
   e.preventDefault();
 
   if (e.target.classList.contains('reset')) {
-    document.querySelectorAll('.hex').forEach((hex) => hex.classList.remove('hit'));
+    for (const hex of hexes) {
+      hex.classList.remove('hit');
+    }
   }
 
-  const hex = e.target.closest('.hex');
-  if (!hex) return;
+  event.target.closest('.hex')?.classList.add('hit');
+});
 
-  hex.classList.add('hit');
+window.addEventListener('pointerup', (e) => {
+  e.preventDefault();
 });

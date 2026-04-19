@@ -3,13 +3,12 @@
   --color-secondary: hotpink;
   --color-accent: blueviolet;
   --color-background: steelblue;
-  --color-glow: color-mix(in srgb, var(--color-primary), #ffffff66);
   --cell: clamp(64px, 20vw, 128px);
   --spread: calc(var(--cell) / 10);
   --aspect: 1.1547; /* top-flat hex */
   --gap: calc(var(--cell) * 0.5 + var(--spread));
-  --margin: calc(var(--cell) * -0.51 / var(--aspect) + var(--spread) / 2 / var(--aspect));
-  --shadow-spread: 1px;
+  --margin: calc(var(--cell) * -0.52 / var(--aspect) + var(--spread) / 2 / var(--aspect));
+  --shadow-spread: 2px;
 }
 
 * {
@@ -28,10 +27,10 @@ body {
 }
 
 .grid {
-  width: min-content;
+  width: max-content;
   margin-inline: auto;
   background-color: #00000001;
-  filter: drop-shadow(0 0 var(--shadow-spread) var(--color-glow));
+  filter: drop-shadow(0 0 var(--shadow-spread) var(--color-background));
   clip-path: polygon(0 20%, 40% 0, 60% 0, 100% 20%, 100% 80%, 60% 100%, 40% 100%, 0 80%);
 }
 
@@ -39,6 +38,7 @@ body {
   gap: 0 var(--gap);
   display: flex;
   justify-content: center;
+  pointer-events: none;
 
   & ~ & {
     margin-top: var(--margin);
@@ -51,22 +51,14 @@ body {
   background-color: #00000001;
   background-image: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  pointer-events: all;
+  touch-action: none;
   transition:
-    filter 0.2s,
-    scale 0.2s;
-
-  &:hover:not(.hit) {
-    --color-primary: var(--color-secondary);
-  }
+    filter 0.3s,
+    scale 0.1s;
 
   &.hit {
     filter: brightness(0.33) grayscale(0.66);
     scale: 0.9;
   }
-}
-
-.grid,
-.hex {
-  -webkit-touch-callout: none;
-  touch-action: none;
 }
