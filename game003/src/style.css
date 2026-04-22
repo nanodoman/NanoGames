@@ -35,7 +35,7 @@ body {
   display: grid;
   max-width: max-content;
   padding: 12px;
-  gap: calc(clamp(0px, var(--hex-radius) * 8px, 8px));
+  gap: calc(min(8px, calc(var(--hex-radius) * 8px)));
   margin-inline: auto;
   filter: drop-shadow(0 0 var(--shadow-spread) var(--color));
   clip-path: polygon(0 20%, 40% 0, 60% 0, 100% 20%, 100% 80%, 60% 100%, 40% 100%, 0 80%);
