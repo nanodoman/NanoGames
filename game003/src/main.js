@@ -15,13 +15,19 @@ class Hex {
 class Game {
   constructor(radius = 2) {
     this.hexes = new Map();
-    this.grid = document.querySelectorAll('.grid');
-    this.hexNodes = document.querySelectorAll('.hex');
-    this.setupGrid(radius);
+    this.setup(radius);
     this.pointerDown = this.pointerDown.bind(this);
     this.pointerUp = this.pointerUp.bind(this);
     window.addEventListener('pointerdown', this.pointerDown);
     window.addEventListener('pointerup', this.pointerUp);
+  }
+
+  get grid() {
+    return document.querySelector('.grid');
+  }
+
+  get hexNodes() {
+    return document.querySelectorAll('.hex');
   }
 
   pointerUp(e) {
@@ -35,7 +41,7 @@ class Game {
     }
 
     const hexElement = event.target.closest('.hex');
-    const { r, c } = hexElement.dataset;
+    const { r, c } = hexElement?.dataset || {};
 
     if (!hexElement || this.getHex(r, c).hit) return;
 
@@ -59,10 +65,24 @@ class Game {
     this.renderGrid();
   }
 
-  setupGrid(radius) {
+  setup(radius, override = false) {
+    if (radius > 9 && !override) {
+      console.warn(
+        'Values above 9 are locked. To override this restriction insert "true" as second argument. Have fun.',
+      );
+      return;
+    }
+
+    this.grid.style.setProperty('--hex-radius', radius);
+    this.grid.innerHTML = '';
     for (let r = -radius; r <= radius; r++) {
       for (let c = -radius; c <= radius; c++) {
         if (Math.abs(r + c) <= radius) {
+          const node = document.createElement('div');
+          node.classList.value = 'hex';
+          node.dataset.r = r;
+          node.dataset.c = c;
+          this.grid.insertAdjacentElement('beforeend', node);
           this.addHex(r, c);
         }
       }
