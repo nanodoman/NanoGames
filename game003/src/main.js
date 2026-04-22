@@ -82,8 +82,8 @@ class Game {
           node.classList.value = 'hex';
           node.dataset.r = r;
           node.dataset.c = c;
-          node.style.setProperty(--r, r);
-          node.style.setProperty(--c, c);
+          node.style.setProperty('--r', r);
+          node.style.setProperty('--c', c);
           this.grid.insertAdjacentElement('beforeend', node);
           this.addHex(r, c);
         }
