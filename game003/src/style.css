@@ -4,10 +4,15 @@
   --color-tertiary: teal;
   --color-accent: blueviolet;
   --color-background: steelblue;
-  --radius: 2;
-  --diameter: calc(var(--radius) * 2 + 1);
-  --aspect: 1.1547; /* top-flat hex */
   --shadow-spread: 3px;
+
+  --radius: 2;
+  --gap: 8px;
+  /* simplified diameter */
+  --diameter: calc(var(--radius) * 2 + 1);
+  --usable-width: calc(100vw - var(--radius) * 2 * var(--gap));
+  --usable-height: calc(100vh - var(--radius) * 2 * var(--gap));
+  --aspect: 1.1547; /* top-flat hex */
 }
 
 * {
@@ -35,8 +40,7 @@ body {
   display: grid;
   max-width: max-content;
   padding: 12px;
-  /* gap breaks responsiveness, grid overflows if screen is too small for grid radius */
-  gap: 8px;
+  gap: var(--gap);
   margin-inline: auto;
   filter: drop-shadow(0 0 var(--shadow-spread) var(--color));
   clip-path: polygon(0 20%, 40% 0, 60% 0, 100% 20%, 100% 80%, 60% 100%, 40% 100%, 0 80%);
@@ -57,7 +61,8 @@ body {
 
   background-image: radial-gradient(at 30% 10%, var(--color-primary), var(--color-accent));
   aspect-ratio: var(--aspect);
-  width: min(calc(100vw / var(--diameter)), calc(100vh / var(--diameter)));
+  max-width: 40vw;
+  width: min(calc(var(--usable-width) / var(--diameter)), calc(var(--usable-height) / var(--diameter)));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   touch-action: none;
   transition:
