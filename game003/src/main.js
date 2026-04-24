@@ -72,8 +72,8 @@ class Game {
       );
       return;
     }
-
-    this.grid.style.setProperty('--hex-radius', radius);
+    
+    document.documentElement.style.setProperty('--radius', radius);
     this.grid.innerHTML = '';
     for (let r = -radius; r <= radius; r++) {
       for (let c = -radius; c <= radius; c++) {

@@ -4,7 +4,8 @@
   --color-tertiary: teal;
   --color-accent: blueviolet;
   --color-background: steelblue;
-  --cell: clamp(64px, 20vw, 128px);
+  --radius: 2;
+  --diameter: calc(var(--radius) * 2 + 1);
   --aspect: 1.1547; /* top-flat hex */
   --shadow-spread: 3px;
 }
@@ -25,17 +26,17 @@ body {
 }
 
 .grid {
-  --hex-radius: 2;
   --sub-row: 2;
   --sub-col: 4;
-  --row-offset: calc(var(--hex-radius) * var(--sub-row) + 1);
-  --col-offset: calc(max(var(--sub-col), var(--hex-radius) * var(--sub-col) - 1));
+  --row-offset: calc(var(--radius) * var(--sub-row) + 1);
+  --col-offset: calc(max(var(--sub-col), var(--radius) * var(--sub-col) - 1));
   --color: var(--color-tertiary);
 
   display: grid;
   max-width: max-content;
   padding: 12px;
-  gap: calc(min(8px, calc(var(--hex-radius) * 8px)));
+  /* gap breaks responsiveness, grid overflows if screen is too small for grid radius */
+  gap: 8px;
   margin-inline: auto;
   filter: drop-shadow(0 0 var(--shadow-spread) var(--color));
   clip-path: polygon(0 20%, 40% 0, 60% 0, 100% 20%, 100% 80%, 60% 100%, 40% 100%, 0 80%);
@@ -56,7 +57,7 @@ body {
 
   background-image: radial-gradient(at 30% 10%, var(--color-primary), var(--color-accent));
   aspect-ratio: var(--aspect);
-  width: var(--cell);
+  width: min(calc(100vw / var(--diameter)), calc(100vh / var(--diameter)));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   touch-action: none;
   transition:
