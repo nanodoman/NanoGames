@@ -29,7 +29,7 @@ body {
   --sub-row: 2;
   --sub-col: 4;
   --row-offset: calc(var(--radius) * var(--sub-row) + 1);
-  --col-offset: calc(max(var(--sub-col), var(--radius) * var(--sub-col) - 1));
+  --col-offset: calc(var(--radius) * var(--sub-col) - (var(--radius) - 1));
   --color: var(--color-tertiary);
 
   display: grid;
