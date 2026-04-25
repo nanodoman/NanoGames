@@ -8,8 +8,8 @@
 
   --radius: 2;
   --gap: 8px;
-  /* simplified diameter */
-  --diameter: calc(var(--radius) * 2 + 1);
+  --diameter-h: calc(var(--radius) * 1.75 + 1);
+  --diameter-v: calc(var(--radius) * 2 + 1);
   --usable-width: calc(100vw - var(--radius) * 2 * var(--gap));
   --usable-height: calc(100vh - var(--radius) * 2 * var(--gap));
   --aspect: 1.1547; /* top-flat hex */
@@ -63,7 +63,7 @@ body {
   background-image: radial-gradient(at 30% 10%, var(--color-primary), var(--color-accent));
   aspect-ratio: var(--aspect);
   max-width: 40vw;
-  width: min(calc(var(--usable-width) / var(--diameter)), calc(var(--usable-height) / var(--diameter)));
+  width: min(calc(var(--usable-width) / var(--diameter-h)), calc(var(--usable-height) / var(--diameter-v)));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   touch-action: none;
   transition:
