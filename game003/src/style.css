@@ -7,12 +7,12 @@
   --shadow-spread: 3px;
 
   --radius: 2;
-  --gap: 8px;
+  --aspect: 1.1547; /* top-flat hex */
   --diameter-h: calc(var(--radius) * 1.75 + 1);
   --diameter-v: calc(var(--radius) * 2 + 1);
+  --gap: min(calc(100vw / var(--diameter-h) * 0.1), calc(100vh / var(--diameter-v)) * 0.1);
   --usable-width: calc(100vw - var(--radius) * 2 * var(--gap));
   --usable-height: calc(100vh - var(--radius) * 2 * var(--gap));
-  --aspect: 1.1547; /* top-flat hex */
 }
 
 * {
