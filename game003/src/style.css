@@ -73,6 +73,7 @@ body {
   touch-action: manipulation;
   margin: 0;
   height: 100vh;
+  height: 100dvh;
   align-content: center;
   overflow: hidden;
   color: var(--color-primary);
