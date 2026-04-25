@@ -3,12 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <script src="src/main.js?v=4.2.5" defer></script>
-    <link rel="stylesheet" href="src/style.css?v=4.2.5" />
+    <script src="src/main.js?v=4.3.0" defer></script>
+    <link rel="stylesheet" href="src/style.css?v=4.3.0" />
     <title>Hexo</title>
   </head>
 
   <body class="reset">
+    <button class="menu-button" popovertarget="menu">&ctdot;</button>
+
     <div class="grid"></div>
+
+    <datalist id="sizes">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </datalist>
+
+    <dialog id="menu" popover>
+      <header class="menu-header">
+        Menu
+        <button class="menu-close" popovertarget="menu" popovertargetaction="hide">&Cross;</button>
+      </header>
+      <menu class="options">
+        <li>
+          <label>
+            <span>Size</span>
+            <input type="range" name="size" list="sizes" min="1" max="3" value="2" onchange="GAME.setup(this.value)" />
+          </label>
+        </li>
+      </menu>
+      <footer class="version"><small>v4.3.0</small></footer>
+    </dialog>
   </body>
 </html>
