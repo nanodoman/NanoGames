@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <script src="src/main.js?v=4.3.2" defer></script>
-    <link rel="stylesheet" href="src/style.css?v=4.3.2" />
+    <script src="src/main.js?v=4.4.0" defer></script>
+    <link rel="stylesheet" href="src/style.css?v=4.4.0" />
     <title>Hexo</title>
   </head>
 
@@ -12,12 +12,13 @@
     <section class="game reset">
       <button class="menu-button" popovertarget="menu">&ctdot;</button>
       <div class="grid"></div>
-      <datalist id="sizes">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </datalist>
     </section>
+
+    <datalist id="sizes">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </datalist>
 
     <dialog id="menu" popover>
       <header class="menu-header">
@@ -30,6 +31,12 @@
             <span>Size</span>
             <input type="range" name="size" list="sizes" min="1" max="3" value="2" onchange="GAME.setup(this.value)" />
           </label>
+        </li>
+        <li>
+          <button onclick="GAME.setMode('FREE')" popovertarget="menu" popovertargetaction="hide">FREE</button>
+        </li>
+        <li>
+          <button onclick="GAME.setMode('MODE1')" popovertarget="menu" popovertargetaction="hide">MODE1</button>
         </li>
       </menu>
       <footer class="version"><small>v4.3.2</small></footer>
