@@ -47,6 +47,7 @@ main {
 }
 
 #game {
+  pointer-events: manipulation;
   display: grid;
   aspect-ratio: 1;
   grid-template-columns: repeat(var(--size), 1fr);

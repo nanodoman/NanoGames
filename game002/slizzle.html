@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slizzle &mdash; slide puzzle</title>
-    <script defer src="src/main.js?v=2.2.0"></script>
-    <link rel="stylesheet" href="src/style.css?v=2.2.0" />
+    <script defer src="src/main.js?v=2.2.1"></script>
+    <link rel="stylesheet" href="src/style.css?v=2.2.1" />
   </head>
 
   <body>
@@ -28,7 +28,7 @@
           </li>
         </menu>
       </div>
-      <div id="game" onmousedown="GAME?.slide(event)"></div>
+      <div id="game" onpointerdown="GAME?.slide(event)"></div>
       <div id="menu">
         <span class="text"><output id="move-count">0</output></span>
         <span class="text" id="time-display">00:00</span>
