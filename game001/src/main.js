@@ -8,7 +8,7 @@ let tails = [];
 let sLen = 1;
 let tic = 1;
 let scoreVal = 0;
-let speed = 200;
+let speed = 500;
 let point = '';
 let size = 100;
 
@@ -36,7 +36,7 @@ function restart() {
   sLen = 1;
   tic = 1;
   scoreVal = 0;
-  speed = 200;
+  speed = 500;
   point = '';
   size = 100;
   start = setInterval(game, speed);
