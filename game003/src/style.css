@@ -87,6 +87,13 @@ body {
   align-content: center;
 }
 
+#score {
+  position: absolute;
+  padding: 0.5em;
+  top: 0;
+  left: 0;
+}
+
 .menu-button {
   all: unset;
   position: absolute;

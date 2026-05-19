@@ -18,9 +18,14 @@ class Hex {
 }
 
 class Game {
+  #score;
+
   constructor(radius = 2) {
     this.mode = MODES.FREE;
     this.hexes = new Map();
+    this.radius = radius;
+    this.state = 1;
+    this.score = 0;
     this.setup(radius);
     this.pointerDown = this.pointerDown.bind(this);
     this.pointerUp = this.pointerUp.bind(this);
@@ -47,6 +52,17 @@ class Game {
     return freeHexes;
   }
 
+  get targetHexes() {
+    const targetHexes = new Set();
+
+    for (const [key, hex] of this.hexes) {
+      if (hex.hit || !hex.target) continue;
+      targetHexes.add(key);
+    }
+
+    return targetHexes;
+  }
+
   get randomFreeHex() {
     if (!this.freeHexes.size) return null;
 
@@ -54,6 +70,15 @@ class Game {
     const [r, c] = [...this.freeHexes][randomIndex].split(',');
 
     return this.getHex(r, c);
+  }
+
+  get score() {
+    return this.#score;
+  }
+
+  set score(value) {
+    document.querySelector('#score').value = value;
+    this.#score = value;
   }
 
   pointerUp(e) {
@@ -64,7 +89,10 @@ class Game {
     if (e.target.classList.contains('reset')) {
       this.resetGrid();
       if (this.mode === MODES.MODE1) {
-        this.rollNext();
+        while (this.targetHexes.size < 1 + (this.score * this.radius) / 10) {
+          this.rollNext();
+        }
+
         this.renderGrid();
       }
 
@@ -100,18 +128,17 @@ class Game {
 
   setup(radius, override = false) {
     if (radius > 9 && !override) {
-      console.warn(
-        'Values above 9 are locked. To override this restriction insert "true" as second argument. Have fun.',
-      );
+      console.warn('Values above 9 are locked. To override this restriction pass "true" as second argument. Have fun.');
       return;
     }
 
     document.documentElement.style.setProperty('--radius', radius);
+    this.radius = +radius;
     this.grid.innerHTML = '';
     this.hexes.clear();
-    for (let r = -radius; r <= radius; r++) {
-      for (let c = -radius; c <= radius; c++) {
-        if (Math.abs(r + c) <= radius) {
+    for (let r = -this.radius; r <= this.radius; r++) {
+      for (let c = -this.radius; c <= this.radius; c++) {
+        if (Math.abs(r + c) <= this.radius) {
           const node = document.createElement('div');
           node.classList.value = 'hex';
           node.dataset.r = r;
@@ -165,6 +192,8 @@ class Game {
       hex.hit = true;
     });
 
+    this.state = 0;
+    this.score = 0;
     this.grid.classList.add('over');
     this.renderGrid();
   }
@@ -175,6 +204,15 @@ class Game {
         if (this.getHex(r, c).target) {
           this.hitHex(r, c);
           this.rollNext();
+
+          if (
+            (Math.random() > 0.96 || Math.random() > 0.96) &&
+            this.targetHexes.size < this.radius + (this.score * this.radius) / 10
+          ) {
+            this.rollNext();
+          }
+
+          if (!this.freeHexes.size && !this.targetHexes.size) this.score++;
         } else {
           this.gameOver();
         }
