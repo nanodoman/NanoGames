@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <script src="src/main.js?v=4.5.0" defer></script>
-    <link rel="stylesheet" href="src/style.css?v=4.5.0" />
+    <script src="src/main.js?v=4.5.1" defer></script>
+    <link rel="stylesheet" href="src/style.css?v=4.5.1" />
     <title>Hexo</title>
   </head>
 
   <body>
     <section class="game reset">
-      <output id="score"></output>
-      <button class="menu-button" popovertarget="menu">&ctdot;</button>
+      <button id="menu-button" class="default" popovertarget="menu">
+        <span>&ctdot;</span>
+        <output id="score"></output>
+      </button>
       <div class="grid"></div>
     </section>
 
@@ -40,7 +42,7 @@
           <button onclick="GAME.setMode('MODE1')" popovertarget="menu" popovertargetaction="hide">MODE1</button>
         </li>
       </menu>
-      <footer class="version"><small>v4.3.2</small></footer>
+      <footer class="version"><small>v4.5.1</small></footer>
     </dialog>
   </body>
 </html>

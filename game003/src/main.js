@@ -181,9 +181,19 @@ class Game {
 
   start() {
     this.resetGrid();
-    if (this.mode === MODES.MODE1) {
-      this.rollNext();
+
+    switch (this.mode) {
+      case MODES.MODE1:
+        document.querySelector('#menu-button').className = 'counter';
+        this.rollNext();
+        break;
+
+      case MODES.FREE:
+      default:
+        document.querySelector('#menu-button').className = 'default';
+        break;
     }
+
     this.renderGrid();
   }
 
