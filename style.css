@@ -38,3 +38,16 @@ h1 {
     }
   }
 }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1em;
+}
+
+a {
+  color: inherit;
+  line-height: 1.5em;
+}
